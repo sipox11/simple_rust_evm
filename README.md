@@ -27,8 +27,10 @@ The main entry point will loop through the bytecode, one byte at a time. Every o
 
 How to run: 
 
-`git checkout tags/v1.0`
-`cargo build && cargo run`
+```
+cargo build && cargo run
+git checkout tags/v1.0
+```
 
 Output (for bytecode `602560056089602C01020300`): 
 
@@ -90,8 +92,10 @@ The main entry point will loop through the bytecode, one byte at a time. Every o
 
 How to run: 
 
-`git checkout tags/v2.0`
-`cargo build && cargo run`
+```
+cargo build && cargo run
+git checkout tags/v2.0
+```
 
 Output (for bytecode `602560056089602C01020360005260206000f3`): 
 
