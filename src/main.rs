@@ -2,6 +2,7 @@ use hex;
 
 pub mod execution;
 pub mod stack;
+pub mod memory;
 
 fn main() {
     // let code: String = String::from("6006600702"); // Calculate 6x7 and leave result on the top of the stack
