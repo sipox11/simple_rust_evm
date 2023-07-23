@@ -16,6 +16,7 @@
   - 0x5F (PUSH0). Pushes value 0 on the stack.
   - 0x60 (PUSH1). Pushes 1 byte on the stack (8 bits).
   - ...
+  - 0x80 (DUP1). Duplicates first item of the stack, placing it on top of the stack.
 
 Only basic arithmetic operators involving the stack, only 1 byte operations with the stack.
 

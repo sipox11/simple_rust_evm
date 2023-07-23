@@ -5,7 +5,7 @@ const MAX_STACK_SIZE: u16 = 1024;
 #[derive(Debug)]
 pub struct Stack {
     items: u16,
-    data: Vec<usize>
+    data: Vec<isize>
 }
 
 impl Stack {
@@ -16,7 +16,7 @@ impl Stack {
         }
     }
 
-    fn pop(&mut self) -> usize {
+    fn pop(&mut self) -> isize {
         if self.items == 0 {
             panic!("Stack underflow!");
         }
@@ -24,12 +24,16 @@ impl Stack {
         self.data.pop().unwrap()
     }
 
-    fn push(&mut self, val: usize) {
+    fn push(&mut self, val: isize) {
         if self.items == MAX_STACK_SIZE {
             panic!("Stack overflow!");
         }
         self.data.push(val);
         self.items += 1;
+    }
+
+    fn get(&self, pos: usize) -> &isize {
+        self.data.get(pos).unwrap()
     }
 }
 
@@ -50,7 +54,9 @@ pub enum Opcode {
     DIV,
     POP,
     PUSH0,
-    PUSH1
+    PUSH1,
+    DUP1,
+    DUP2,
 }
 
 impl Context {
@@ -105,14 +111,20 @@ impl Context {
             Opcode::ADD => {
                 let a = self.stack.pop();
                 let b = self.stack.pop();
-                self.stack.push((a + b) % usize::MAX);
+                self.stack.push((a + b) % isize::MAX);
             },
             // Extract top two values from the stack, multiply them and push result to the stack
             Opcode::MUL => {
                 let a = self.stack.pop();
                 let b = self.stack.pop();
-                self.stack.push((a * b) % usize::MAX);
+                self.stack.push((a * b) % isize::MAX);
             },
+            // Extract top two values from the stack, subtract them and push result to the stack. Panic on underflow
+            Opcode::SUB => {
+                let a = self.stack.pop();
+                let b = self.stack.pop();
+                self.stack.push(a - b);
+            }
             // Extract top two values from the stack, divide them (int division) and push result to the stack
             Opcode::DIV => println!("DIV"),
             // Pop last element of the stack
@@ -123,13 +135,24 @@ impl Context {
             Opcode::PUSH0 => {
                 self.stack.push(0);
             },
+            // Push 1 byte of value on the stack
             Opcode::PUSH1 => {
                 // Increase PC in 1 byte because we're reading one byte of data
                 self.pc += 1;
                 match self.code.get(self.pc) {
-                    Some(data) => self.stack.push(usize::from(*data)),
+                    Some(data) => self.stack.push(isize::from(*data)),
                     None => panic!("No more data to read, corrupt bytecode!"),
                 }
+            },
+            // Duplicate first stack item on top of the stack
+            Opcode::DUP1 => {
+                let item = self.stack.get(0);
+                self.stack.push((*item).clone());
+            },
+            // Duplicate second stack item on top of the stack
+            Opcode::DUP2 => {
+                let item = self.stack.get(1);
+                self.stack.push((*item).clone());
             },
             _ => {
                 println!("Unknown opcode, halting!");
@@ -165,6 +188,10 @@ fn load_instructions() -> HashMap<u8, Opcode> {
     instruction_set.insert(0x5F, Opcode::PUSH0);
     // PUSH1
     instruction_set.insert(0x60, Opcode::PUSH1);
+    // DUP1
+    instruction_set.insert(0x80, Opcode::DUP1);
+    // DUP2
+    instruction_set.insert(0x81, Opcode::DUP2);
     // Return full set
     instruction_set
 }
