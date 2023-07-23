@@ -4,7 +4,8 @@ use cast::isize;
 use std::collections::HashMap;
 
 // Memory is modeled as a key-value store, where keys are the 256-bit offsets, holding 256-bit values
-struct Memory {
+#[derive(Debug)]
+pub struct Memory {
     data: HashMap<usize, isize>,
     fmp: usize, // Free memory pointer -> Pointing to the next empty memory location
 }
@@ -17,6 +18,8 @@ impl Memory {
         };
         // Persist the fmp
         mem.store_at(0x40, isize(mem.fmp).unwrap());
+        // Return instance
+        mem
     }
 
     // Store a 256-bit value on a specific offset, without messing with the fmp
@@ -27,5 +30,9 @@ impl Memory {
     pub fn store(&mut self, val: isize) {
         self.data.insert(self.fmp, val);
         self.fmp += 0x20;
+    }
+    /// Reads a 256-bit value from a specific offset in memory
+    pub fn load(&self, offset: usize) -> isize {
+        *(self.data.get(&offset).unwrap())
     }
 }

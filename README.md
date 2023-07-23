@@ -72,7 +72,6 @@ Post-execution: Stack { items: 1, data: [868] }
   - 0x50 (POP). Remove item from the stack
   - 0x51 (MLOAD). Load 1 word from memory (32 bytes)
   - 0x52 (MSTORE). Write 1 word to memory (32 bytes)
-  - 0x53 (MSTORE8). Write 1 byte to memory
   - ...
   - 0x5F (PUSH0). Pushes value 0 on the stack.
   - 0x60 (PUSH1). Pushes 1 byte on the stack (8 bits).
