@@ -17,15 +17,10 @@
   - 0x60 (PUSH1). Pushes 1 byte on the stack (8 bits).
   - ...
   - 0x80 (DUP1). Duplicates first item of the stack, placing it on top of the stack.
+  - 0x80 (DUP2). Duplicates second item of the stack, placing it on top of the stack.
 
 Only basic arithmetic operators involving the stack, only 1 byte operations with the stack.
 
-Execution bytecode will be hard-coded on the main entrypoint and it will get executed. Package structure:
-
-Cargo::
-     ::ExecutionContext::
-                       ::Instruction
-     ::Stack
-
+Execution bytecode will be hard-coded on the main entrypoint and it will get executed. 
 
 The main entry point will loop through the bytecode, one byte at a time. Every opcode gets processed, potentially needing to fetch another byte if the opcode needs params. Execution stops either when STOP is hit, or when there are no more opcodes to run. 
