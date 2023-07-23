@@ -1,5 +1,5 @@
 use std::{collections::HashMap, usize};
-use crate::stack::Stack;
+use super::stack::Stack;
 
 pub struct Context {
     pc: usize,
