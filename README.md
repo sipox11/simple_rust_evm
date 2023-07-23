@@ -29,34 +29,31 @@ How to run:
 
 `cargo build && cargo run`
 
-Output (for bytecode `6089602C016005026025800300`): 
+Output (for bytecode `602560056089602C01020300`): 
 
 ```
 PUSH1 @ pc=0
 Pre-execution: Stack { items: 0, data: [] }
-Post-execution: Stack { items: 1, data: [137] }
+Post-execution: Stack { items: 1, data: [37] }
 PUSH1 @ pc=2
-Pre-execution: Stack { items: 1, data: [137] }
-Post-execution: Stack { items: 2, data: [137, 44] }
-ADD @ pc=4
-Pre-execution: Stack { items: 2, data: [137, 44] }
-Post-execution: Stack { items: 1, data: [181] }
-PUSH1 @ pc=5
-Pre-execution: Stack { items: 1, data: [181] }
-Post-execution: Stack { items: 2, data: [181, 5] }
-MUL @ pc=7
-Pre-execution: Stack { items: 2, data: [181, 5] }
-Post-execution: Stack { items: 1, data: [905] }
-PUSH1 @ pc=8
-Pre-execution: Stack { items: 1, data: [905] }
-Post-execution: Stack { items: 2, data: [905, 37] }
-DUP1 @ pc=10
-Pre-execution: Stack { items: 2, data: [905, 37] }
-Post-execution: Stack { items: 3, data: [905, 37, 905] }
-SUB @ pc=11
-Pre-execution: Stack { items: 3, data: [905, 37, 905] }
-Post-execution: Stack { items: 2, data: [905, 868] }
-STOP @ pc=12
-Pre-execution: Stack { items: 2, data: [905, 868] }
-Post-execution: Stack { items: 2, data: [905, 868] }
+Pre-execution: Stack { items: 1, data: [37] }
+Post-execution: Stack { items: 2, data: [37, 5] }
+PUSH1 @ pc=4
+Pre-execution: Stack { items: 2, data: [37, 5] }
+Post-execution: Stack { items: 3, data: [37, 5, 137] }
+PUSH1 @ pc=6
+Pre-execution: Stack { items: 3, data: [37, 5, 137] }
+Post-execution: Stack { items: 4, data: [37, 5, 137, 44] }
+ADD @ pc=8
+Pre-execution: Stack { items: 4, data: [37, 5, 137, 44] }
+Post-execution: Stack { items: 3, data: [37, 5, 181] }
+MUL @ pc=9
+Pre-execution: Stack { items: 3, data: [37, 5, 181] }
+Post-execution: Stack { items: 2, data: [37, 905] }
+SUB @ pc=10
+Pre-execution: Stack { items: 2, data: [37, 905] }
+Post-execution: Stack { items: 1, data: [868] }
+STOP @ pc=11
+Pre-execution: Stack { items: 1, data: [868] }
+Post-execution: Stack { items: 1, data: [868] }
 ```
