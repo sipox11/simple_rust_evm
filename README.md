@@ -29,7 +29,7 @@ How to run:
 
 `cargo build && cargo run`
 
-Output: 
+Output (for bytecode `6089602C016005026025800300`): 
 
 ```
 PUSH1 @ pc=0
