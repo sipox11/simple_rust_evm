@@ -1,7 +1,16 @@
+use hex;
+
 pub mod execution;
 
 fn main() {
-    let bytecode = String::from("00");
-    let execution_ctx = execution::Context::new(bytecode);
-    execution_ctx.debug();
+    let code: String = String::from("6006600702");
+    let bytecode: Vec<u8> = hex::decode(code).expect("Invalid bytecode!");
+    // Display bytecode as a list of opcodes in hex
+    for opcode in &bytecode {
+        println!("0x{:x}", opcode);
+    }
+    let mut execution_ctx = execution::Context::new(bytecode); // bytecode is moved out of scope
+    // Execute bytecode
+    execution_ctx.execute();
 }
+
