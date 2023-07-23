@@ -91,6 +91,72 @@ How to run:
 
 `cargo build && cargo run`
 
-Output (for bytecode `602560056089602C01020360005360016000f3`): 
+Output (for bytecode `602560056089602C01020360005260206000f3`): 
 
 It is expected to store the result of the operation both at the top of the stack, on memory and return the result from execution.
+
+```
+PUSH1 @ pc=0
+Pre-execution: Stack { items: 0, data: [] }
+Pre-execution: Memory { data: {64: 96}, fmp: 96 }
+Post-execution: Stack { items: 1, data: [37] }
+Post-execution: Memory { data: {64: 96}, fmp: 96 }
+PUSH1 @ pc=2
+Pre-execution: Stack { items: 1, data: [37] }
+Pre-execution: Memory { data: {64: 96}, fmp: 96 }
+Post-execution: Stack { items: 2, data: [37, 5] }
+Post-execution: Memory { data: {64: 96}, fmp: 96 }
+PUSH1 @ pc=4
+Pre-execution: Stack { items: 2, data: [37, 5] }
+Pre-execution: Memory { data: {64: 96}, fmp: 96 }
+Post-execution: Stack { items: 3, data: [37, 5, 137] }
+Post-execution: Memory { data: {64: 96}, fmp: 96 }
+PUSH1 @ pc=6
+Pre-execution: Stack { items: 3, data: [37, 5, 137] }
+Pre-execution: Memory { data: {64: 96}, fmp: 96 }
+Post-execution: Stack { items: 4, data: [37, 5, 137, 44] }
+Post-execution: Memory { data: {64: 96}, fmp: 96 }
+ADD @ pc=8
+Pre-execution: Stack { items: 4, data: [37, 5, 137, 44] }
+Pre-execution: Memory { data: {64: 96}, fmp: 96 }
+Post-execution: Stack { items: 3, data: [37, 5, 181] }
+Post-execution: Memory { data: {64: 96}, fmp: 96 }
+MUL @ pc=9
+Pre-execution: Stack { items: 3, data: [37, 5, 181] }
+Pre-execution: Memory { data: {64: 96}, fmp: 96 }
+Post-execution: Stack { items: 2, data: [37, 905] }
+Post-execution: Memory { data: {64: 96}, fmp: 96 }
+SUB @ pc=10
+Pre-execution: Stack { items: 2, data: [37, 905] }
+Pre-execution: Memory { data: {64: 96}, fmp: 96 }
+Post-execution: Stack { items: 1, data: [868] }
+Post-execution: Memory { data: {64: 96}, fmp: 96 }
+PUSH1 @ pc=11
+Pre-execution: Stack { items: 1, data: [868] }
+Pre-execution: Memory { data: {64: 96}, fmp: 96 }
+Post-execution: Stack { items: 2, data: [868, 0] }
+Post-execution: Memory { data: {64: 96}, fmp: 96 }
+MSTORE @ pc=13
+Pre-execution: Stack { items: 2, data: [868, 0] }
+Pre-execution: Memory { data: {64: 96}, fmp: 96 }
+Post-execution: Stack { items: 0, data: [] }
+Post-execution: Memory { data: {0: 868, 64: 96}, fmp: 96 }
+PUSH1 @ pc=14
+Pre-execution: Stack { items: 0, data: [] }
+Pre-execution: Memory { data: {0: 868, 64: 96}, fmp: 96 }
+Post-execution: Stack { items: 1, data: [32] }
+Post-execution: Memory { data: {0: 868, 64: 96}, fmp: 96 }
+PUSH1 @ pc=16
+Pre-execution: Stack { items: 1, data: [32] }
+Pre-execution: Memory { data: {0: 868, 64: 96}, fmp: 96 }
+Post-execution: Stack { items: 2, data: [32, 0] }
+Post-execution: Memory { data: {0: 868, 64: 96}, fmp: 96 }
+RETURN @ pc=18
+Pre-execution: Stack { items: 2, data: [32, 0] }
+Pre-execution: Memory { data: {0: 868, 64: 96}, fmp: 96 }
+Post-execution: Stack { items: 0, data: [] }
+Post-execution: Memory { data: {0: 868, 64: 96}, fmp: 96 }
+===================================================
+Successful execution! Return value: 868
+===================================================
+```
