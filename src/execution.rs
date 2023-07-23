@@ -1,41 +1,5 @@
 use std::{collections::HashMap, usize};
-
-const MAX_STACK_SIZE: u16 = 1024;
-
-#[derive(Debug)]
-pub struct Stack {
-    items: u16,
-    data: Vec<isize>
-}
-
-impl Stack {
-    fn new() -> Self {
-        Self {
-            items: 0,
-            data: vec![],
-        }
-    }
-
-    fn pop(&mut self) -> isize {
-        if self.items == 0 {
-            panic!("Stack underflow!");
-        }
-        self.items -= 1;
-        self.data.pop().unwrap()
-    }
-
-    fn push(&mut self, val: isize) {
-        if self.items == MAX_STACK_SIZE {
-            panic!("Stack overflow!");
-        }
-        self.data.push(val);
-        self.items += 1;
-    }
-
-    fn get(&self, pos: usize) -> &isize {
-        self.data.get(pos).unwrap()
-    }
-}
+use crate::stack::Stack;
 
 pub struct Context {
     pc: usize,
@@ -194,8 +158,4 @@ fn load_instructions() -> HashMap<u8, Opcode> {
     instruction_set.insert(0x81, Opcode::DUP2);
     // Return full set
     instruction_set
-}
-
-pub fn test() {
-    println!("Test!");
 }
