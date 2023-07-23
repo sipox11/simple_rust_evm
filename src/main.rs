@@ -1,3 +1,7 @@
+pub mod execution;
+
 fn main() {
-    println!("Hello, world!");
+    let bytecode = String::from("00");
+    let execution_ctx = execution::Context::new(bytecode);
+    execution_ctx.debug();
 }
